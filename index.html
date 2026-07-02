@@ -340,20 +340,42 @@
   .reveal.in-view { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 900px) {
-    .hero-mandala-wrap { height: auto; padding: 0; }
-    .mandala-grid { grid-template-columns: 1fr; grid-template-rows: auto; border: none; gap: 1px; }
-    .cell { min-height: 35vh; padding: 8vw; }
-    .cell-center { display: none; }
-    .cell-desc { position: relative; bottom: auto; opacity: 1; transform: none; margin-top: 16px;}
-    .cell:hover .cell-title { margin-bottom: 0; transform: none; }
+    /* Preserve the 9-Square Vastu Mandala on Mobile */
+    .hero-mandala-wrap { height: auto; aspect-ratio: 1/1; padding: 0; }
+    .mandala-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 1px; border: none; }
+    .cell { min-height: 0; padding: 2vw; justify-content: center; align-items: center; text-align: center; }
     
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .expertise-list { grid-template-columns: 1fr; }
-    .portfolio-grid { grid-template-columns: 1fr; }
-    .project-card--featured { flex-direction: column; aspect-ratio: auto; min-height: 80vh; }
-    .workflow-step { grid-template-columns: 1fr; gap: 40px; }
+    .direction-label { display: none; } /* Hide technical labels for cleaner look */
+    .cell-title { font-size: clamp(12px, 3.5vw, 18px); margin: 0; transform: none; }
+    .cell-desc { display: none; } /* Hide descriptions on mobile grid */
+    .cell:hover .cell-title { transform: none; margin-bottom: 0; }
+    
+    .cell-center { display: flex; } /* Ensure center mandala shows */
+    .center-mandala { width: 80%; height: 80%; }
+    
+    /* Top Mid Brand Cell */
+    .cell:nth-child(2) .cell-content { justify-content: center; align-items: center; gap: 4px; }
+    .logo-img { width: 40px; }
+    .primary-tagline { font-size: clamp(11px, 2.5vw, 14px); line-height: 1.1; margin: 0; }
+
+    /* Fix General Sections */
+    .section { padding: 80px 6vw; }
+    .section-title { font-size: clamp(32px, 8vw, 42px); margin-bottom: 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    
+    .expertise-list { grid-template-columns: 1fr; margin-top: 32px; }
+    .expertise-card { padding: 32px 24px; gap: 16px; }
+    
+    .portfolio-grid { grid-template-columns: 1fr; margin-top: 32px; }
+    .project-card--featured { flex-direction: column; aspect-ratio: auto; min-height: 60vh; }
+    .project-content { padding: 8vw; }
+    
+    .workflow-list { gap: 60px; margin-top: 40px; }
+    .workflow-step { grid-template-columns: 1fr; gap: 32px; }
     .workflow-step:nth-child(even) .step-content { order: 0; }
-    .contact-wrap { grid-template-columns: 1fr; }
+    .step-img-wrap { aspect-ratio: 4/3; }
+    
+    .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
   }
 </style>
 </head>
@@ -486,8 +508,10 @@
           <h2 class="section-title">Two Kinds of Alignment.</h2>
         </div>
         <div class="about-text reveal">
-          <p>At Vastu Vidya Homes, we believe in the power of Vastu Shastra—an ancient Indian system of architecture based on the principles of harmony and balance in the natural world. By aligning your home with the principles of Vastu, we create spaces conducive to positive energy and well-being.</p>
-          <p>A house is aligned twice — once to the compass, once to the contractor's calendar. Most firms hand you one and leave you to chase the other. Vastu Vidya Homes holds both lines at once. The same team that reads your plot's geometry stays on site until the keys are in your hand.</p>
+          <p style="font-size: 24px; font-family: var(--serif); color: var(--ink); line-height: 1.4; margin-bottom: 32px;">Have you ever walked into a stunningly designed home, yet felt an inexplicable sense of unease? That is the hidden cost of spatial misalignment.</p>
+          <p>A home built against the natural flow of solar, thermal, and magnetic energy will always feel restless, no matter how expensive the finishes. <strong>Vastu Shastra is not superstition—it is the ancient science of environmental physics.</strong></p>
+          <p>When you align your architecture with the earth's natural grid—placing heavy structural elements in the Southwest to ground the home, and opening the Northeast to invite the morning sun—you stop fighting nature. The result is a space that breathes. A home where sleep is deeper, health is protected, and prosperity naturally follows.</p>
+          <p>At Vastu Vidya Homes, we don't just build houses. We engineer peace of mind from the ground up, ensuring your home is aligned twice: once to the compass, and once to the contractor's calendar.</p>
         </div>
       </div>
     </section>
