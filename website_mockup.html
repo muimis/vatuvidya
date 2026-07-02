@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vastu Vidya Homes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16233F;
+    --ink-soft: #2C3A5C;
+    --laterite: #A8462E;
+    --laterite-deep: #833523;
+    --gold: #B8934A;
+    --gold-light: #D8BD80;
+    --ivory: #F6F0E4;
+    --paper: #FCF9F3;
+    --green: #55603F;
+    --charcoal: #221C18;
+    --line: rgba(22,35,63,0.15);
+    --line-strong: rgba(22,35,63,0.4);
+    
+    --serif: 'Fraunces', serif;
+    --sans: 'Work Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    
+    --grid-bg: repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px 11.111%),
+               repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px 11.111%);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background-color: var(--ivory);
+    color: var(--charcoal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  ::selection { background: var(--gold-light); color: var(--ink); }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------------------- HEADER ---------------------- */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(246, 240, 228, 0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-mark {
+    width: 64px;
+    height: auto;
+  }
+  .logo-text {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-links a {
+    color: var(--ink-soft);
+    transition: color 0.3s ease;
+  }
+  .nav-links a:hover {
+    color: var(--laterite);
+  }
+  
+  .btn {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--laterite);
+    color: var(--paper);
+    padding: 14px 28px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .btn:hover { background: var(--laterite-deep); }
+  .btn--outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .btn--outline:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ---------------------- TYPOGRAPHY ---------------------- */
+  h1, h2, h3 { font-family: var(--serif); color: var(--ink); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--laterite);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: var(--laterite);
+    display: inline-block;
+  }
+
+  /* ---------------------- HERO ---------------------- */
+  .hero {
+    position: relative;
+    padding: 180px 6vw 120px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .hero-bg-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    pointer-events: none;
+    background-image: var(--grid-bg);
+    z-index: 1;
+  }
+  .hero-image-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  /* Simulating the mandala grid overlay on the image */
+  .hero-image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grid-bg);
+    opacity: 0.2;
+    mix-blend-mode: multiply;
+  }
+  .hero-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 70%;
+    opacity: 0.2; /* Washed out to let text pop, or can use overlay */
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+  .hero-title {
+    font-size: clamp(48px, 7vw, 92px);
+    margin-bottom: 24px;
+    max-width: 12ch;
+  }
+  .hero-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 450;
+    font-size: clamp(22px, 2.5vw, 28px);
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .hero-body {
+    font-size: 17px;
+    max-width: 50ch;
+    margin-bottom: 48px;
+    color: var(--charcoal);
+  }
+
+  /* ---------------------- SECTION: ABOUT ---------------------- */
+  .section {
+    padding: 120px 6vw;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .section--ink {
+    background-color: var(--ink);
+    color: var(--paper);
+  }
+  .section--ink h1, .section--ink h2, .section--ink h3 { color: var(--paper); }
+  .section--ink .eyebrow { color: var(--gold-light); }
+  .section--ink .eyebrow::before { background: var(--gold-light); }
+  .section--ink p { color: rgba(252,249,243,0.8); }
+  
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .about-title {
+    font-size: clamp(36px, 4vw, 56px);
+  }
+  .about-text p {
+    font-size: 18px;
+    margin-bottom: 24px;
+    max-width: 58ch;
+  }
+  
+  /* ---------------------- SECTION: EXPERTISE ---------------------- */
+  .expertise-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 60px;
+  }
+  .expertise-card {
+    background: var(--paper);
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: background 0.3s ease;
+  }
+  .expertise-card:hover {
+    background: var(--ivory);
+  }
+  .card-icon { width: 44px; height: 44px; color: var(--laterite); margin-bottom: 12px; }
+  .card-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+  .card-desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) { .expertise-list { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .expertise-list { grid-template-columns: 1fr; } }
+
+  /* ---------------------- SECTION: CONTACT ---------------------- */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  @media (max-width: 900px) { .contact-wrap { grid-template-columns: 1fr; } }
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 40px;
+  }
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .contact-detail {
+    font-size: 18px;
+    font-family: var(--serif);
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 60px;
+    margin-top: 80px;
+    border-top: 1px solid rgba(252,249,243,0.1);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: rgba(252,249,243,0.5);
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo-lockup">
+      <img src="vasthu logo.svg" alt="VVH Mark" class="logo-mark">
+      <span class="logo-text">Vastu Vidya Homes</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#about">Philosophy</a>
+      <a href="#services">Expertise</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn--outline">Get in Touch</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-image-wrap">
+      <img src="hero.png" alt="Kerala Home Construction in Golden Light">
+    </div>
+    <div class="hero-bg-grid"></div>
+    
+    <div class="hero-content">
+      <div class="eyebrow reveal">Positioning</div>
+      <h1 class="hero-title reveal">Every Direction, Accounted For.</h1>
+      <div class="hero-sub reveal">Transform your space, transform your life.</div>
+      <p class="hero-body reveal">The only Trivandrum firm that treats spatial alignment and construction management as one discipline, not two hand-offs.</p>
+      <a href="#contact" class="btn reveal">Schedule a Consultation</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="about-grid">
+      <div class="about-header reveal">
+        <div class="eyebrow">Our Philosophy</div>
+        <h2 class="about-title">Two Kinds of Alignment.</h2>
+      </div>
+      <div class="about-text reveal">
+        <p>At Vastu Vidya Homes, we believe in the power of Vastu Shastra—an ancient Indian system of architecture based on the principles of harmony and balance in the natural world. By aligning your home with the principles of Vastu, we create spaces conducive to positive energy and well-being.</p>
+        <p>A house is aligned twice — once to the compass, once to the contractor's calendar. Most firms hand you one and leave you to chase the other. Vastu Vidya Homes holds both lines at once. The same team that reads your plot's geometry stays on site until the keys are in your hand.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="eyebrow reveal">Areas of Expertise</div>
+    <h2 class="about-title reveal">From the Grid to the Handover.</h2>
+    
+    <div class="expertise-list reveal">
+      
+      <div class="expertise-card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="24" r="17"/>
+          <polygon points="24,12 27,24 24,36 21,24"/>
+          <line x1="24" y1="6" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="42"/>
+          <line x1="6" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="42" y2="24"/>
+        </svg>
+        <div class="card-title">VASTU CONSULTING &amp; ARCHITECTURE</div>
+        <div class="card-desc">Our team of Vastu Vidya experts specializes in designing and building homes that are in harmony with natural elements and energy flow. We speak in measurements, not mysticism.</div>
+      </div>
+
+      <div class="expertise-card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 6h18l6 6v30a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
+          <path d="M30 6v6h6"/>
+          <line x1="16" y1="20" x2="32" y2="20"/><line x1="16" y1="26" x2="32" y2="26"/><line x1="16" y1="32" x2="26" y2="32"/>
+        </svg>
+        <div class="card-title">VASTU DRAWINGS &amp; INTERIORS</div>
+        <div class="card-desc">We provide a holistic approach, taking into account the direction of the space, colors, and natural materials (laterite, teak) to create a beautifully balanced design.</div>
+      </div>
+
+      <div class="expertise-card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="20" r="13"/>
+          <path d="M17 27 14 42l10-5 10 5-3-15"/>
+          <path d="M18 20l4 4 8-8"/>
+        </svg>
+        <div class="card-title">K-SMART APPROVAL</div>
+        <div class="card-desc">Local-body permit clearance handled end-to-end, because every Vastu reading must tie directly to a compliant, legal drawing and official approval stamp.</div>
+      </div>
+
+      <div class="expertise-card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="42" x2="12" y2="10"/>
+          <line x1="12" y1="10" x2="38" y2="10"/>
+          <line x1="34" y1="10" x2="34" y2="4"/>
+          <line x1="12" y1="16" x2="6" y2="16"/>
+          <line x1="30" y1="10" x2="30" y2="24"/>
+          <line x1="30" y1="24" x2="24" y2="24"/>
+          <polyline points="8,42 16,42 16,36 8,36" />
+        </svg>
+        <div class="card-title">CONSTRUCTION &amp; OUTDOOR</div>
+        <div class="card-desc">Site execution and project management from the grid to the handover. Includes comprehensive garden design, landscape architecture, and outdoor construction.</div>
+      </div>
+
+      <div class="expertise-card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 24 24 10l16 14"/>
+          <path d="M12 22v16h24V22"/>
+          <path d="M29 38v-8h-3l6-8 2 2-4 5h3v9z"/>
+        </svg>
+        <div class="card-title">RENOVATION &amp; RETROFIT</div>
+        <div class="card-desc">Expert additions, structural retrofits, and meticulous re-alignment of existing spaces to correct and optimize foundational energy flows.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT (INK SECTION) -->
+  <section id="contact" class="section section--ink">
+    <div class="contact-wrap">
+      <div class="contact-header reveal">
+        <div class="eyebrow">Contact Us</div>
+        <h2 class="about-title" style="margin-bottom: 24px;">One firm,<br>one number to call.</h2>
+        <p style="max-width: 40ch; font-size: 18px;">If you have any questions or would like to schedule a consultation with our experts, please reach out.</p>
+      </div>
+      
+      <div class="contact-info reveal">
+        <div class="contact-block">
+          <span class="contact-label">Call</span>
+          <span class="contact-detail">+91 9747 000 305 <br> +91 9747 000 306</span>
+        </div>
+        <div class="contact-block">
+          <span class="contact-label">Email</span>
+          <span class="contact-detail">info@vastuvidyahomes.com</span>
+        </div>
+        <div class="contact-block">
+          <span class="contact-label">Visit</span>
+          <span class="contact-detail">Vastu Vidya Homes<br>Opposite Kunnuvila Devi Temple<br>Pottayil, Trivandrum, Kerala</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom reveal">
+      <span>© 2026 VASTU VIDYA HOMES</span>
+      <img src="vasthu logo.svg" alt="VVH" style="width: 24px; filter: brightness(0) invert(1);">
+      <span>ALL RIGHTS RESERVED</span>
+    </div>
+  </section>
+
+  <script>
+    // Simple reveal animation observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

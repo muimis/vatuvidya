@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vastu Vidya Homes - Portfolio Workflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16233F;
+    --ink-soft: #2C3A5C;
+    --laterite: #A8462E;
+    --laterite-deep: #833523;
+    --gold: #B8934A;
+    --gold-light: #D8BD80;
+    --ivory: #F6F0E4;
+    --paper: #FCF9F3;
+    --charcoal: #221C18;
+    --line: rgba(22,35,63,0.15);
+    
+    --serif: 'Fraunces', serif;
+    --sans: 'Work Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background-color: var(--ivory);
+    color: var(--charcoal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------------------- HEADER ---------------------- */
+  header {
+    padding: 24px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    background-color: var(--paper);
+  }
+
+  .logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 56px;
+    height: auto;
+  }
+  .logo-text {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--laterite);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: var(--laterite);
+    display: inline-block;
+  }
+
+  /* ---------------------- PAGE TITLE ---------------------- */
+  .page-hero {
+    padding: 80px 6vw 40px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .page-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(36px, 5vw, 64px);
+    color: var(--ink);
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+  .page-desc {
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------------------- WORKFLOW TIMELINE ---------------------- */
+  .workflow {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 6vw 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  /* Alternate image position on desktop */
+  .step:nth-child(even) .step-content {
+    order: -1;
+  }
+
+  @media (max-width: 900px) {
+    .step { grid-template-columns: 1fr; gap: 40px; }
+    .step:nth-child(even) .step-content { order: 0; }
+  }
+
+  .step-img-wrap {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .step-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .step-img-wrap:hover .step-img {
+    transform: scale(1.05);
+  }
+
+  /* Emulate the 9x9 crop grid from brand guide */
+  .step-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(to right, rgba(255,255,255,0.2) 0 1px, transparent 1px 11.111%),
+      repeating-linear-gradient(to bottom, rgba(255,255,255,0.2) 0 1px, transparent 1px 11.111%);
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--laterite);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .step-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--ink);
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+  .step-body {
+    font-size: 16px;
+    color: var(--charcoal);
+    max-width: 45ch;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="logo-lockup">
+      <img src="vasthu logo.svg" alt="VVH Mark" class="logo-mark">
+      <span class="logo-text">Vastu Vidya Homes</span>
+    </a>
+    <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-soft); letter-spacing: 0.1em; text-transform: uppercase;">
+      Case Study 01
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="eyebrow reveal" style="justify-content: center;">Portfolio</div>
+    <h1 class="page-title reveal">The A-Z Workflow</h1>
+    <p class="page-desc reveal">A complete walk-through from the first compass reading to the final key handover. We account for every direction, every step of the way.</p>
+  </div>
+
+  <section class="workflow">
+    
+    <!-- STEP 01 -->
+    <div class="step">
+      <div class="step-img-wrap reveal">
+        <img src="portfolio_1.png" alt="The Reading" class="step-img">
+      </div>
+      <div class="step-content reveal">
+        <span class="step-num">PHASE 01</span>
+        <h2 class="step-title">The Reading<br>(Vastu Consulting)</h2>
+        <p class="step-body">We begin on site. Establishing the exact compass orientations, assessing natural elements, and plotting the Vastu Purusha Mandala over the raw land. This ensures the foundational geometry aligns with absolute precision before a single brick is drawn.</p>
+      </div>
+    </div>
+
+    <!-- STEP 02 -->
+    <div class="step">
+      <div class="step-img-wrap reveal">
+        <img src="portfolio_2.png" alt="The Blueprint" class="step-img">
+      </div>
+      <div class="step-content reveal">
+        <span class="step-num">PHASE 02</span>
+        <h2 class="step-title">The Blueprint<br>(Vastu Drawings &amp; K-Smart)</h2>
+        <p class="step-body">The grid dictates the floor plan. We translate the initial reading into compliant architectural drawings—placing fire elements in the Southeast and maximizing air flow in the Northwest. We then handle all local K-Smart approvals, ensuring the spatial vision is legally cleared.</p>
+      </div>
+    </div>
+
+    <!-- STEP 03 -->
+    <div class="step">
+      <div class="step-img-wrap reveal">
+        <img src="portfolio_3.png" alt="The Build" class="step-img">
+      </div>
+      <div class="step-content reveal">
+        <span class="step-num">PHASE 03</span>
+        <h2 class="step-title">The Build<br>(Construction)</h2>
+        <p class="step-body">Translating paper to ground. Using rich, local materials like laterite and teak, our site supervisors manage the build day-to-day. We ensure contractors don't compromise the meticulous alignments established in Phase 01.</p>
+      </div>
+    </div>
+
+    <!-- STEP 04 -->
+    <div class="step">
+      <div class="step-img-wrap reveal">
+        <img src="portfolio_4.png" alt="The Handover" class="step-img">
+      </div>
+      <div class="step-content reveal">
+        <span class="step-num">PHASE 04</span>
+        <h2 class="step-title">The Handover<br>(Finished Space)</h2>
+        <p class="step-body">A completed home bathed in natural light, embodying serenity and balance. From the macro-geometry of the plot to the micro-placement of the interior finishes, the result is a beautiful space built to endure.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

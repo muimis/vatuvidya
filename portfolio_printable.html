@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vastu Vidya Homes - Printable Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16233F;
+    --laterite: #A8462E;
+    --gold: #B8934A;
+    --paper: #FCF9F3;
+    --line: rgba(22,35,63,0.15);
+    
+    --serif: 'Fraunces', serif;
+    --sans: 'Work Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #222; /* Dark background for web viewer */
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    color: var(--ink);
+    padding: 40px 0;
+  }
+
+  /* ---------------------- A4 PAGE SETUP ---------------------- */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    background-color: var(--paper);
+    margin: 0 auto 40px auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    padding: 20mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Grid overlay to mimic architectural draft paper subtly */
+  .page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(to right, rgba(22,35,63,0.05) 0 1px, transparent 1px 11.111%),
+      repeating-linear-gradient(to bottom, rgba(22,35,63,0.05) 0 1px, transparent 1px 11.111%);
+    z-index: 0;
+  }
+
+  .content-layer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Typography */
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.1; }
+  p { font-size: 14px; line-height: 1.6; color: rgba(22,35,63,0.8); }
+  
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--laterite);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--laterite);
+  }
+
+  /* Utilities */
+  .flex-grow { flex: 1; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+  .img-fit { width: 100%; height: 100%; object-fit: cover; }
+  .mb-4 { margin-bottom: 4mm; }
+  .mb-8 { margin-bottom: 8mm; }
+  .mb-12 { margin-bottom: 12mm; }
+
+  /* Logo */
+  .brand-lockup { display: flex; align-items: center; gap: 12px; }
+  .brand-lockup img { width: 50px; }
+  .brand-lockup span { font-family: var(--serif); font-weight: 600; font-size: 16px; }
+
+  /* Headers / Footers per page */
+  .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15mm; border-bottom: 1px solid var(--line); padding-bottom: 5mm; }
+  .page-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--line); padding-top: 5mm; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; color: rgba(22,35,63,0.5); text-transform: uppercase; }
+
+  /* ---------------------- PRINT SPECIFIC CSS ---------------------- */
+  @media print {
+    @page { size: A4 portrait; margin: 0; }
+    body { background: none; padding: 0; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      page-break-after: always;
+      /* Browsers strip background colors by default, so we use webkit-print-color-adjust */
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER -->
+  <div class="page">
+    <div class="content-layer">
+      
+      <div style="margin-top: 20mm; text-align: center;">
+        <img src="vasthu%20logo.svg" alt="VVH Logo" style="width: 100px; margin-bottom: 10mm;">
+        <h1 style="font-size: 42px; margin-bottom: 4mm;">Vastu Vidya Homes</h1>
+        <div style="font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--laterite);">Architecture &amp; Consulting Portfolio</div>
+      </div>
+
+      <div class="flex-grow" style="margin: 20mm 0; position: relative; border: 1px solid var(--line); padding: 5mm;">
+        <img src="project_1.png" alt="Cover Image" class="img-fit">
+      </div>
+
+      <div style="text-align: center; margin-bottom: 10mm;">
+        <h2 style="font-size: 24px; margin-bottom: 8mm;">Every Direction, Accounted For.</h2>
+        <div style="font-family: var(--mono); font-size: 10px; line-height: 1.8; color: var(--ink);">
+          +91 9747 000 305 <br>
+          INFO@VASTUVIDYAHOMES.COM <br>
+          TRIVANDRUM, KERALA
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: PHILOSOPHY -->
+  <div class="page">
+    <div class="content-layer">
+      <div class="page-header">
+        <div class="brand-lockup"><img src="vasthu%20logo.svg" alt="Logo"><span>Vastu Vidya Homes</span></div>
+        <div style="font-family: var(--mono); font-size: 10px;">01 / PHILOSOPHY</div>
+      </div>
+
+      <div class="eyebrow">The Foundation</div>
+      <h1 style="font-size: 36px;" class="mb-12">Two Kinds of Alignment.</h1>
+
+      <div class="grid-2 flex-grow">
+        <div>
+          <p class="mb-8" style="font-size: 16px;">At Vastu Vidya Homes, we believe in the power of Vastu Shastra—an ancient Indian system of architecture based on the principles of harmony and balance in the natural world. By aligning your home with the principles of Vastu, we create spaces conducive to positive energy and well-being.</p>
+          <p class="mb-8" style="font-size: 16px;">A house is aligned twice — once to the compass, once to the contractor's calendar. Most firms hand you one and leave you to chase the other. Vastu Vidya Homes holds both lines at once. The same team that reads your plot's geometry stays on site until the keys are in your hand.</p>
+          <p style="font-size: 16px;">We speak in measurements, not mysticism. Every Vastu reading ties directly to a compliant, legal drawing and official K-Smart approval stamp.</p>
+        </div>
+        <div style="position: relative; background: var(--line);">
+          <img src="portfolio_1.png" alt="Consulting" class="img-fit">
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Portfolio 2026</span>
+        <span>Page 01</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: THE WORKFLOW -->
+  <div class="page">
+    <div class="content-layer">
+      <div class="page-header">
+        <div class="brand-lockup"><img src="vasthu%20logo.svg" alt="Logo"><span>Vastu Vidya Homes</span></div>
+        <div style="font-family: var(--mono); font-size: 10px;">02 / METHODOLOGY</div>
+      </div>
+
+      <div class="eyebrow">The A-Z Workflow</div>
+      <h1 style="font-size: 36px;" class="mb-12">From the Grid to the Handover.</h1>
+
+      <div class="grid-2 flex-grow">
+        <!-- Step 1 -->
+        <div style="margin-bottom: 10mm;">
+          <div style="height: 60mm; margin-bottom: 4mm; background: var(--line);"><img src="portfolio_1.png" class="img-fit"></div>
+          <div style="font-family: var(--mono); color: var(--laterite); font-size: 10px; margin-bottom: 2mm;">PHASE 01</div>
+          <h3 style="font-size: 18px; margin-bottom: 2mm;">The Reading</h3>
+          <p>We begin on site. Establishing the exact compass orientations and plotting the Vastu Purusha Mandala over the raw land.</p>
+        </div>
+        <!-- Step 2 -->
+        <div style="margin-bottom: 10mm;">
+          <div style="height: 60mm; margin-bottom: 4mm; background: var(--line);"><img src="portfolio_2.png" class="img-fit"></div>
+          <div style="font-family: var(--mono); color: var(--laterite); font-size: 10px; margin-bottom: 2mm;">PHASE 02</div>
+          <h3 style="font-size: 18px; margin-bottom: 2mm;">The Blueprint &amp; Permit</h3>
+          <p>The grid dictates the floor plan. We translate readings into compliant architectural drawings and handle all K-Smart approvals.</p>
+        </div>
+        <!-- Step 3 -->
+        <div>
+          <div style="height: 60mm; margin-bottom: 4mm; background: var(--line);"><img src="portfolio_3.png" class="img-fit"></div>
+          <div style="font-family: var(--mono); color: var(--laterite); font-size: 10px; margin-bottom: 2mm;">PHASE 03</div>
+          <h3 style="font-size: 18px; margin-bottom: 2mm;">The Build</h3>
+          <p>Translating paper to ground. Using rich, local materials like laterite and teak, managed daily by our site supervisors.</p>
+        </div>
+        <!-- Step 4 -->
+        <div>
+          <div style="height: 60mm; margin-bottom: 4mm; background: var(--line);"><img src="portfolio_4.png" class="img-fit"></div>
+          <div style="font-family: var(--mono); color: var(--laterite); font-size: 10px; margin-bottom: 2mm;">PHASE 04</div>
+          <h3 style="font-size: 18px; margin-bottom: 2mm;">The Handover</h3>
+          <p>A completed home bathed in natural light, embodying serenity and balance. Built to endure and properly aligned.</p>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Portfolio 2026</span>
+        <span>Page 02</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: SELECTED WORKS -->
+  <div class="page">
+    <div class="content-layer">
+      <div class="page-header">
+        <div class="brand-lockup"><img src="vasthu%20logo.svg" alt="Logo"><span>Vastu Vidya Homes</span></div>
+        <div style="font-family: var(--mono); font-size: 10px;">03 / SELECTED WORKS</div>
+      </div>
+
+      <div class="eyebrow">Case Studies</div>
+      <h1 style="font-size: 36px;" class="mb-12">Built to the Grid.</h1>
+
+      <div class="flex-grow" style="display: flex; flex-direction: column; gap: 10mm;">
+        <!-- Work 1 -->
+        <div style="display: flex; gap: 10mm; height: 90mm;">
+          <div style="flex: 1; background: var(--line);"><img src="project_1.png" class="img-fit"></div>
+          <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="font-size: 24px; margin-bottom: 4mm;">The Courtyard Residence</h3>
+            <p>Centered around a traditional Nadumuttam, perfectly aligned to maximize cross-ventilation in the Northwest sector. A true integration of indoor and outdoor space.</p>
+          </div>
+        </div>
+        <!-- Work 2 -->
+        <div style="display: flex; gap: 10mm; height: 90mm;">
+          <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: right;">
+            <h3 style="font-size: 24px; margin-bottom: 4mm;">The Laterite Villa</h3>
+            <p>Exposed rust-red stone masonry defining the Southwest boundary, grounding the home deeply into the earth element while providing natural thermal regulation.</p>
+          </div>
+          <div style="flex: 1; background: var(--line);"><img src="hero.png" class="img-fit"></div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Portfolio 2026</span>
+        <span>Page 03</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: BACK COVER -->
+  <div class="page" style="background-color: var(--ink); color: var(--paper);">
+    <div class="content-layer" style="align-items: center; justify-content: center; text-align: center;">
+      
+      <svg width="120" height="120" viewBox="0 0 100 100" fill="none" stroke="var(--laterite)" stroke-width="0.5" style="margin-bottom: 15mm; opacity: 0.5;">
+        <rect x="5" y="5" width="90" height="90" />
+        <line x1="35" y1="5" x2="35" y2="95" />
+        <line x1="65" y1="5" x2="65" y2="95" />
+        <line x1="5" y1="35" x2="95" y2="35" />
+        <line x1="5" y1="65" x2="95" y2="65" />
+        <line x1="5" y1="5" x2="95" y2="95" />
+        <line x1="95" y1="5" x2="5" y2="95" />
+        <rect x="35" y="35" width="30" height="30" stroke="var(--paper)" stroke-width="1" />
+      </svg>
+
+      <h1 style="font-size: 42px; margin-bottom: 8mm; color: var(--paper);">Start Your Project</h1>
+      <p style="font-size: 16px; max-width: 40ch; margin-bottom: 15mm; color: rgba(252,249,243,0.8);">Contact us to schedule an on-site consultation and begin the alignment process for your new home.</p>
+
+      <div style="font-family: var(--mono); font-size: 12px; line-height: 2; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light);">
+        +91 9747 000 305<br>
+        INFO@VASTUVIDYAHOMES.COM<br>
+        OPPOSITE KUNNUVILA DEVI TEMPLE<br>
+        POTTAYIL, TRIVANDRUM, KERALA
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

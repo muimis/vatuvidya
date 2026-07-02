@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vastu Vidya Homes - Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16233F;
+    --laterite: #A8462E;
+    --gold: #B8934A;
+    --gold-light: #D8BD80;
+    --ivory: #F6F0E4;
+    --paper: #FCF9F3;
+    --charcoal: #221C18;
+    --line: rgba(22,35,63,0.15);
+    
+    --serif: 'Fraunces', serif;
+    --sans: 'Work Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background-color: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------------------- HEADER ---------------------- */
+  header {
+    padding: 24px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    background-color: var(--paper);
+  }
+
+  .logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 56px;
+    height: auto;
+  }
+  .logo-text {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .header-nav {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .header-nav a {
+    color: var(--laterite);
+    text-decoration: none;
+  }
+
+  /* ---------------------- PAGE TITLE ---------------------- */
+  .page-hero {
+    padding: 100px 6vw 80px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--laterite);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: var(--laterite);
+    display: inline-block;
+  }
+  .page-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(42px, 6vw, 72px);
+    color: var(--ink);
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+
+  /* ---------------------- PORTFOLIO GRID ---------------------- */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--line);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  
+  @media (max-width: 900px) {
+    .portfolio-grid { grid-template-columns: 1fr; }
+  }
+
+  .project-card {
+    background: var(--ivory);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 1 / 1;
+  }
+  
+  /* Make the first card span full width to break the grid monotony */
+  .project-card--featured {
+    grid-column: 1 / -1;
+    aspect-ratio: 2 / 1;
+    flex-direction: row;
+  }
+  @media (max-width: 900px) {
+    .project-card--featured {
+      flex-direction: column;
+      aspect-ratio: auto;
+      min-height: 80vh;
+    }
+  }
+
+  .project-image-wrap {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  .project-card:hover .project-image {
+    transform: scale(1.04);
+  }
+  
+  /* Vastu Grid Overlay */
+  .project-image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(to right, rgba(255,255,255,0.15) 0 1px, transparent 1px 11.111%),
+      repeating-linear-gradient(to bottom, rgba(255,255,255,0.15) 0 1px, transparent 1px 11.111%);
+  }
+
+  .project-content {
+    padding: 4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: var(--ivory);
+  }
+  .project-card--featured .project-content {
+    flex: 0 0 35%;
+    justify-content: center;
+  }
+  
+  .project-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--laterite);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 42px);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  .project-desc {
+    font-size: 15px;
+    color: var(--charcoal);
+    max-width: 40ch;
+  }
+  .project-link-text {
+    margin-top: 32px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s ease;
+  }
+  .project-card:hover .project-link-text {
+    gap: 16px;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <a href="website_unconventional.html" class="logo-lockup">
+      <img src="vasthu%20logo.svg" alt="VVH Mark" class="logo-mark">
+      <span class="logo-text">Vastu Vidya Homes</span>
+    </a>
+    <div class="header-nav">
+      <a href="website_unconventional.html">Back to Home</a>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="eyebrow reveal">Completed Works</div>
+    <h1 class="page-title reveal">Built to the Grid.</h1>
+    <p class="project-desc reveal" style="margin: 0 auto; text-align: center; max-width: 60ch;">A curated selection of homes where absolute spatial alignment meets uncompromising construction quality.</p>
+  </div>
+
+  <section class="portfolio-grid">
+    
+    <!-- PROJECT 01 (FEATURED) -->
+    <!-- Links to the specific A-Z workflow mockup we built earlier -->
+    <a href="portfolio_mockup.html" class="project-card project-card--featured reveal">
+      <div class="project-image-wrap">
+        <img src="project_1.png" alt="The Courtyard House" class="project-image">
+      </div>
+      <div class="project-content">
+        <span class="project-num">CASE STUDY 01</span>
+        <h2 class="project-title">The Courtyard Residence</h2>
+        <p class="project-desc">A deep dive into our A-Z workflow. Centered around a traditional Nadumuttam, perfectly aligned to maximize cross-ventilation in the Northwest sector.</p>
+        <div class="project-link-text">View Full Workflow →</div>
+      </div>
+    </a>
+
+    <!-- PROJECT 02 -->
+    <a href="#" class="project-card reveal">
+      <div class="project-image-wrap">
+        <img src="hero.png" alt="The Laterite Villa" class="project-image">
+      </div>
+      <div class="project-content">
+        <span class="project-num">PROJECT 02</span>
+        <h2 class="project-title">The Laterite Villa</h2>
+        <p class="project-desc">Exposed rust-red stone masonry defining the Southwest boundary, grounding the home deeply into the earth element.</p>
+        <div class="project-link-text">View Details →</div>
+      </div>
+    </a>
+
+    <!-- PROJECT 03 -->
+    <a href="#" class="project-card reveal">
+      <div class="project-image-wrap">
+        <img src="portfolio_4.png" alt="The Urban Retreat" class="project-image">
+      </div>
+      <div class="project-content">
+        <span class="project-num">PROJECT 03</span>
+        <h2 class="project-title">Urban Retreat</h2>
+        <p class="project-desc">A contemporary interior space flooded with natural light, where Vastu principles dictate the silent flow of energy through modern finishes.</p>
+        <div class="project-link-text">View Details →</div>
+      </div>
+    </a>
+
+  </section>
+  
+  <div style="text-align: center; padding: 120px 6vw;">
+    <h3 style="font-family: var(--serif); font-size: 32px; margin-bottom: 24px;">Start your own project.</h3>
+    <a href="website_unconventional.html#contact" style="display: inline-block; padding: 16px 32px; background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;">Contact Us</a>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

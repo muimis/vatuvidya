@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vastu Vidya Homes - Office Name Board</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16233F;
+    --laterite: #A8462E;
+    --gold: #B8934A;
+    --ivory: #F6F0E4;
+    --paper: #FCF9F3;
+    --serif: 'Fraunces', serif;
+    --sans: 'Work Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  
+  body {
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: var(--sans);
+  }
+
+  /* 
+    The Name Board Design 
+    Aspect ratio 2:1 (e.g. 4ft x 2ft or 6ft x 3ft)
+  */
+  .board-container {
+    width: 90vw;
+    max-width: 1000px;
+    aspect-ratio: 2 / 1;
+    background-color: var(--paper);
+    border: 8px solid var(--ink); /* Emulating a dark wood/metal frame */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 40px;
+    box-sizing: border-box;
+    /* Optional: A subtle grid background for the brand texture */
+    background-image:
+      repeating-linear-gradient(to right, rgba(22,35,63,0.05) 0 1px, transparent 1px 11.111%),
+      repeating-linear-gradient(to bottom, rgba(22,35,63,0.05) 0 1px, transparent 1px 11.111%);
+  }
+
+  .logo {
+    width: clamp(120px, 15vw, 180px);
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(32px, 5vw, 64px);
+    color: var(--ink);
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .subtitle {
+    font-family: var(--mono);
+    font-size: clamp(12px, 1.8vw, 18px);
+    color: var(--laterite);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin: 0 0 2rem 0;
+  }
+
+  .services {
+    display: flex;
+    gap: 2rem;
+    font-family: var(--sans);
+    font-size: clamp(10px, 1.2vw, 14px);
+    font-weight: 500;
+    color: var(--ink);
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .services span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .services span::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background-color: var(--gold);
+    border-radius: 50%;
+  }
+
+  .services span:first-child::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+  <div class="board-container">
+    <img src="vasthu logo.svg" alt="Vastu Vidya Homes Logo" class="logo">
+    
+    <h1 class="title">VASTU VIDYA HOMES</h1>
+    <h2 class="subtitle">Every Direction, Accounted For.</h2>
+    
+    <div class="services">
+      <span>Vastu Consulting</span>
+      <span>K-Smart Approval</span>
+      <span>Construction</span>
+      <span>Renovation</span>
+    </div>
+  </div>
+
+</body>
+</html>
