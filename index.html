@@ -341,20 +341,44 @@
 
   @media (max-width: 900px) {
     /* Preserve the 9-Square Vastu Mandala on Mobile */
-    .hero-mandala-wrap { height: auto; aspect-ratio: 1/1; padding: 0; }
+    .hero-mandala-wrap { height: auto; aspect-ratio: 1/1; padding: 0; position: relative; overflow: hidden; }
     .mandala-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 1px; border: none; }
-    .cell { min-height: 0; padding: 2vw; justify-content: center; align-items: center; text-align: center; }
+    .cell { min-height: 0; padding: 2vw; justify-content: center; align-items: center; text-align: center; transition: background-color 0.3s; }
     
-    .direction-label { display: none; } /* Hide technical labels for cleaner look */
+    /* Touch Feedback */
+    .cell:active { background-color: var(--gold); }
+    .cell:active .cell-title { color: var(--paper); }
+    .cell:active .cell-bg { opacity: 0.4 !important; transform: scale(1) !important; transition: 0.1s; }
+
+    /* Continuous Energy Breathing Animation for Mobile */
+    .cell-bg {
+      animation: vastuPulse 15s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cell:nth-child(1) .cell-bg { animation-delay: 0s; }
+    .cell:nth-child(3) .cell-bg { animation-delay: 2.5s; }
+    .cell:nth-child(6) .cell-bg { animation-delay: 5s; }
+    .cell:nth-child(9) .cell-bg { animation-delay: 7.5s; } /* Contact SE */
+    .cell:nth-child(8) .cell-bg { animation-delay: 10s; }
+    .cell:nth-child(7) .cell-bg { animation-delay: 12.5s; }
+    .cell:nth-child(4) .cell-bg { animation-delay: 15s; }
+
+    @keyframes vastuPulse {
+      0%, 100% { opacity: 0; transform: scale(1.1); filter: grayscale(100%); }
+      10%, 20% { opacity: 0.3; transform: scale(1); filter: grayscale(0%); }
+      30% { opacity: 0; transform: scale(1.05); filter: grayscale(100%); }
+    }
+
+    .direction-label { display: none; }
     .cell-title { font-size: clamp(12px, 3.5vw, 18px); margin: 0; transform: none; }
-    .cell-desc { display: none; } /* Hide descriptions on mobile grid */
+    .cell-desc { display: none; }
     .cell:hover .cell-title { transform: none; margin-bottom: 0; }
     
-    .cell-center { display: flex; } /* Ensure center mandala shows */
+    .cell-center { display: flex; }
     .center-mandala { width: 80%; height: 80%; }
     
     /* Top Mid Brand Cell */
     .cell:nth-child(2) .cell-content { justify-content: center; align-items: center; gap: 4px; }
+    .cell:nth-child(2) .cell-bg { animation: none; opacity: 0.05; }
     .logo-img { width: 40px; }
     .primary-tagline { font-size: clamp(11px, 2.5vw, 14px); line-height: 1.1; margin: 0; }
 
