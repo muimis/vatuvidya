@@ -160,11 +160,29 @@
   .s-desc { font-size: 16px; color: var(--charcoal); max-width: 40ch; }
 
   /* -------------------------------------------------------------
+     CONTACT FORM
+     ------------------------------------------------------------- */
+  .contact-form { display: flex; flex-direction: column; gap: 40px; width: 100%; text-align: left; }
+  .form-group { position: relative; }
+  .form-input { 
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(246,240,228,0.3); 
+    padding: 12px 0; color: var(--ivory); font-family: var(--sans); font-size: 16px; border-radius: 0;
+  }
+  .form-input:focus { outline: none; border-bottom-color: var(--gold); }
+  .form-input::placeholder { color: rgba(246,240,228,0.4); text-transform: uppercase; font-size: 11px; font-family: var(--mono); letter-spacing: 0.1em; }
+  .submit-btn {
+    background: var(--ivory); color: var(--ink); border: none; padding: 16px 32px; 
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; 
+    cursor: pointer; transition: background 0.3s; align-self: flex-start;
+  }
+  .submit-btn:hover { background: var(--gold); }
+
+  /* -------------------------------------------------------------
      CONTACT / FOOTER
      ------------------------------------------------------------- */
-  .footer { background: var(--ink); color: var(--paper); padding: 120px 6vw 60px; text-align: center; }
-  .footer-title { font-family: var(--serif); font-size: clamp(48px, 8vw, 100px); font-style: italic; margin-bottom: 60px; color: var(--ivory); }
-  .contact-details { display: flex; justify-content: center; gap: 80px; font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,240,228,0.7); margin-bottom: 120px; }
+  .footer { background: var(--ink); color: var(--paper); padding: 120px 6vw 60px; }
+  .footer-title { font-family: var(--serif); font-size: clamp(48px, 8vw, 100px); font-style: italic; color: var(--ivory); }
+  .contact-details { display: flex; font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,240,228,0.7); }
   
   /* -------------------------------------------------------------
      ANIMATIONS & RESPONSIVE
@@ -199,7 +217,9 @@
     .portfolio-item, .portfolio-item:nth-child(even) { grid-template-columns: 1fr; gap: 40px; }
     .portfolio-item:nth-child(even) .p-img-wrap { order: 0; }
     .service-list { grid-template-columns: 1fr; gap: 40px; }
-    .contact-details { flex-direction: column; gap: 32px; }
+    
+    .footer-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
+    .contact-form-wrap { padding: 32px !important; }
   }
 </style>
 </head>
@@ -326,6 +346,12 @@
       <div class="eyebrow reveal">Our Expertise</div>
       <h2 class="huge-text reveal">From the grid to the handover.</h2>
       
+      <div class="reveal" style="max-width: 65ch; margin-bottom: 60px; border-left: 2px solid var(--laterite); padding-left: 24px;">
+        <p style="font-size: 20px; color: var(--ink); line-height: 1.5; font-family: var(--serif);">
+          Most clients are forced to act as mediators between an architect's modern vision and a Vastu consultant's strict rules, often resulting in compromised floor plans. <br><br><strong>We eliminate this friction.</strong> As masters of both disciplines, we ensure absolute spatial alignment before a single brick is laid, without sacrificing contemporary design.
+        </p>
+      </div>
+      
       <div class="service-list reveal">
         <div class="service-item">
           <span class="s-num">01</span>
@@ -350,26 +376,49 @@
       </div>
     </section>
 
-    <!-- CONTACT FOOTER -->
-    <footer id="contact" class="footer">
-      <h2 class="footer-title reveal">Let's build your home.</h2>
-      
-      <div class="contact-details reveal">
-        <div>
-          <div style="color: var(--gold); margin-bottom: 8px;">CALL</div>
-          <div>+91 9747 000 305</div>
-        </div>
-        <div>
-          <div style="color: var(--gold); margin-bottom: 8px;">EMAIL</div>
-          <div>info@vastuvidyahomes.com</div>
-        </div>
-        <div>
-          <div style="color: var(--gold); margin-bottom: 8px;">VISIT</div>
-          <div>Opposite Kunnuvila Devi Temple<br>Trivandrum, Kerala</div>
+    <!-- TESTIMONIAL / SOCIAL PROOF -->
+    <section class="section">
+      <div class="reveal" style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--laterite)" style="margin-bottom: 32px; opacity: 0.5;">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <h3 style="font-family: var(--serif); font-size: clamp(24px, 4vw, 42px); color: var(--ink); line-height: 1.3; margin-bottom: 40px; font-style: italic;">
+          "They didn't just build a house; they engineered a space where our family finally sleeps well. We never had to compromise between beautiful architecture and strict Vastu rules. They mastered both."
+        </h3>
+        <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal);">
+          — Dr. Sreekumar, <span style="color: var(--laterite);">The Courtyard Residence</span>
         </div>
       </div>
+    </section>
 
-      <img src="vasthu%20logo.svg" alt="VVH" style="width: 60px; filter: invert(1); opacity: 0.5;">
+    <!-- CONTACT FOOTER -->
+    <footer id="contact" class="footer">
+      <div class="footer-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1200px; margin: 0 auto 120px;">
+        
+        <div style="text-align: left;">
+          <h2 class="footer-title reveal" style="margin-bottom: 60px;">Start your<br>project.</h2>
+          <div class="contact-details reveal" style="flex-direction: column; gap: 40px;">
+            <div><div style="color: var(--gold); margin-bottom: 8px;">CALL</div><div>+91 9747 000 305</div></div>
+            <div><div style="color: var(--gold); margin-bottom: 8px;">EMAIL</div><div>info@vastuvidyahomes.com</div></div>
+            <div><div style="color: var(--gold); margin-bottom: 8px;">VISIT</div><div>Opposite Kunnuvila Devi Temple<br>Trivandrum, Kerala</div></div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal" style="background: rgba(255,255,255,0.03); padding: 60px; border: 1px solid rgba(255,255,255,0.1);">
+          <form class="contact-form">
+            <div class="form-group"><input type="text" class="form-input" placeholder="Your Name" required></div>
+            <div class="form-group"><input type="text" class="form-input" placeholder="Plot Location (e.g. Trivandrum)" required></div>
+            <div class="form-group"><input type="text" class="form-input" placeholder="Plot Size (e.g. 10 Cents)"></div>
+            <div class="form-group"><input type="email" class="form-input" placeholder="Email Address" required></div>
+            <button type="submit" class="submit-btn">Request Consultation</button>
+          </form>
+        </div>
+        
+      </div>
+      
+      <div style="text-align: center;">
+        <img src="vasthu%20logo.svg" alt="VVH" style="width: 60px; filter: invert(1); opacity: 0.5;">
+      </div>
     </footer>
 
   </div>
