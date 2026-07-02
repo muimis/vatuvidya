@@ -6,18 +6,17 @@
 <title>Vastu Vidya Homes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450&family=Work+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,300;1,9..144,450&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #16233F;
     --ink-soft: #2C3A5C;
     --laterite: #A8462E;
-    --laterite-deep: #833523;
     --gold: #B8934A;
     --ivory: #F6F0E4;
     --paper: #FCF9F3;
     --charcoal: #221C18;
-    --line: rgba(22,35,63,0.15);
+    --line: rgba(22,35,63,0.1);
     
     --serif: 'Fraunces', serif;
     --sans: 'Work Sans', sans-serif;
@@ -25,7 +24,6 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
   html { scroll-behavior: smooth; }
 
   body {
@@ -35,687 +33,359 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-
-  ::selection { background: var(--laterite); color: var(--paper); }
   a { text-decoration: none; color: inherit; }
 
   /* -------------------------------------------------------------
-     UNCONVENTIONAL HERO: The 9-Square Vastu Mandala
+     STICKY NAVIGATION
+     ------------------------------------------------------------- */
+  #sticky-nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    background: rgba(252,249,243,0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 16px 6vw;
+    display: flex; justify-content: space-between; align-items: center;
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid var(--line);
+  }
+  #sticky-nav.visible { transform: translateY(0); }
+  
+  .nav-logo { width: 32px; }
+  .nav-links { display: flex; gap: 32px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink); }
+  .nav-links a:hover { color: var(--laterite); }
+
+  /* -------------------------------------------------------------
+     UNCONVENTIONAL HERO: 9-Square Grid
      ------------------------------------------------------------- */
   .hero-mandala-wrap {
-    width: 100vw;
-    height: 100vh;
-    padding: 2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100vw; height: 100vh; padding: 2vw;
+    display: flex; justify-content: center; align-items: center;
     background-color: var(--ivory);
   }
 
   .mandala-grid {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 1px;
-    background-color: var(--line);
-    border: 1px solid var(--line);
+    width: 100%; height: 100%;
+    display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+    gap: 1px; background-color: var(--line); border: 1px solid var(--line);
   }
 
   .cell {
     background-color: var(--paper);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 2vw;
-    color: var(--ink);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 2vw; color: var(--ink);
   }
 
-  /* Hover Images */
   .cell-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.6s ease, transform 6s linear;
-    transform: scale(1.05);
-    z-index: 0;
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transition: opacity 0.8s ease, transform 6s linear;
+    transform: scale(1.05); z-index: 0;
   }
-  .cell:hover .cell-bg {
-    opacity: 0.2;
-    transform: scale(1);
-  }
+  .cell:hover .cell-bg { opacity: 0.2; transform: scale(1); }
 
-  .cell-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-  }
-
-  .direction-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--laterite);
-    text-transform: uppercase;
-  }
-
-  .cell-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(24px, 3.5vw, 48px);
-    line-height: 1;
-    margin-top: auto;
-    transition: transform 0.4s ease, margin-bottom 0.4s ease;
-    transform: translateY(0);
-    margin-bottom: 0;
-  }
-  .cell:hover .cell-title {
-    transform: translateY(-10px);
-    margin-bottom: 60px;
-  }
-
-  .cell-desc {
-    font-size: 13px;
-    color: var(--ink-soft);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    max-width: 30ch;
-    margin-top: 10px;
-    position: absolute;
-    bottom: 2vw;
-  }
-  .cell:hover .cell-desc {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Center Square */
-  .cell-center {
-    background: transparent;
-    pointer-events: none;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .center-mandala {
-    width: 60%;
-    height: 60%;
-    opacity: 0.15;
-    animation: rotate 60s linear infinite;
-  }
-  @keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .logo-img {
-    width: 120px;
-    filter: brightness(0.1) sepia(1) hue-rotate(180deg) saturate(2);
-  }
+  .cell-content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; justify-content: space-between; }
+  .direction-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--laterite); text-transform: uppercase; }
   
-  .primary-tagline {
-    font-family: var(--serif);
-    font-size: clamp(16px, 2.2vw, 36px);
-    line-height: 1.2;
-    color: var(--ink);
+  .cell-title {
+    font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 3.5vw, 48px); line-height: 1; margin-top: auto;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.5s ease;
+    transform: translateY(0); margin-bottom: 0;
   }
-  .accent-text { color: var(--laterite); }
+  .cell:hover .cell-title { transform: translateY(-10px); margin-bottom: 40px; }
 
+  /* The Center Cell: "Welcome Home" */
+  .cell-center {
+    background: var(--paper);
+    display: flex; justify-content: center; align-items: center; text-align: center;
+    text-decoration: none; cursor: pointer;
+  }
+  .center-text {
+    font-family: var(--serif); font-style: italic; font-size: clamp(24px, 4vw, 48px); color: var(--laterite);
+    transition: transform 0.4s ease;
+  }
+  .cell-center:hover .center-text { transform: scale(1.05); }
+
+  .logo-img { width: 120px; filter: brightness(0.1); }
+  .primary-tagline { font-family: var(--serif); font-size: clamp(16px, 2.2vw, 36px); line-height: 1.2; color: var(--ink); }
 
   /* -------------------------------------------------------------
-     GLOBAL SECTION STYLES
+     CONTEMPORARY EDITORIAL SECTIONS
      ------------------------------------------------------------- */
   .scroll-content { background-color: var(--paper); }
-  .section { padding: 120px 6vw; border-bottom: 1px solid var(--line); }
+  .section { padding: 120px 6vw; position: relative; }
   .section--ivory { background-color: var(--ivory); }
   
   .eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--laterite);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 24px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--laterite);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
   }
-  .eyebrow--center { justify-content: center; }
-  .eyebrow::before {
-    content: ''; width: 22px; height: 1px; background: var(--laterite); display: inline-block;
-  }
-  .eyebrow--center::after {
-    content: ''; width: 22px; height: 1px; background: var(--laterite); display: inline-block;
-  }
+  .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--laterite); display: inline-block; }
 
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(36px, 5vw, 64px);
-    color: var(--ink);
-    line-height: 1.1;
-    margin-bottom: 40px;
+  .huge-text {
+    font-family: var(--serif); font-size: clamp(42px, 6vw, 84px); color: var(--ink); line-height: 1.1; margin-bottom: 40px;
+    max-width: 14ch;
   }
-  .section-title--center { text-align: center; max-width: 800px; margin: 0 auto 40px; }
-  .section-desc--center { text-align: center; max-width: 60ch; margin: 0 auto; font-size: 18px; color: var(--ink-soft); }
 
   /* -------------------------------------------------------------
-     ABOUT SECTION
+     IMMERSIVE PORTFOLIO
      ------------------------------------------------------------- */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-  .about-text p { font-size: 18px; margin-bottom: 24px; max-width: 58ch; }
-
-  /* -------------------------------------------------------------
-     EXPERTISE SECTION
-     ------------------------------------------------------------- */
-  .expertise-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    margin-top: 60px;
-  }
-  .expertise-card {
-    background: var(--ivory);
-    padding: 60px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    transition: background 0.3s ease;
-  }
-  .expertise-card:hover { background: var(--paper); }
-  .card-num { font-family: var(--mono); color: var(--laterite); font-size: 12px; }
-  .card-title {
-    font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: 0.05em; color: var(--ink); text-transform: uppercase;
-  }
-  .card-desc { font-size: 14.5px; color: var(--charcoal); line-height: 1.6; }
-
-  /* -------------------------------------------------------------
-     PORTFOLIO GRID
-     ------------------------------------------------------------- */
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    margin-top: 60px;
-  }
-  .project-card {
-    background: var(--ivory);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    aspect-ratio: 1 / 1;
-  }
-  .project-card--featured { grid-column: 1 / -1; aspect-ratio: 2 / 1; flex-direction: row; cursor: pointer; }
+  .portfolio-list { display: flex; flex-direction: column; gap: 80px; }
+  .portfolio-item { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+  .portfolio-item:nth-child(even) { grid-template-columns: 1fr 1.2fr; }
+  .portfolio-item:nth-child(even) .p-img-wrap { order: 1; }
   
-  .project-image-wrap { flex: 1; overflow: hidden; position: relative; }
-  .project-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
-  .project-card:hover .project-image { transform: scale(1.04); }
-  .project-image-wrap::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background-image:
-      repeating-linear-gradient(to right, rgba(255,255,255,0.15) 0 1px, transparent 1px 11.111%),
-      repeating-linear-gradient(to bottom, rgba(255,255,255,0.15) 0 1px, transparent 1px 11.111%);
-  }
-
-  .project-content { padding: 4vw; display: flex; flex-direction: column; justify-content: flex-end; background: var(--ivory); }
-  .project-card--featured .project-content { flex: 0 0 35%; justify-content: center; }
+  .p-img-wrap { width: 100%; aspect-ratio: 4/5; overflow: hidden; position: relative; }
+  .p-img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
+  .portfolio-item:hover .p-img { transform: scale(1.05); }
   
-  .project-num { font-family: var(--mono); font-size: 12px; color: var(--laterite); margin-bottom: 24px; }
-  .project-title { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 42px); margin-bottom: 12px; line-height: 1.1; color: var(--ink); }
-  .project-desc { font-size: 15px; color: var(--charcoal); max-width: 40ch; }
-  .project-link-text {
-    margin-top: 32px; font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink);
-    display: flex; align-items: center; gap: 8px; transition: gap 0.3s ease;
+  .p-content { padding: 40px 0; }
+  .p-title { font-family: var(--serif); font-size: clamp(32px, 4vw, 56px); margin-bottom: 24px; color: var(--ink); line-height: 1.1; }
+  .p-desc { font-size: 18px; color: var(--charcoal); margin-bottom: 40px; line-height: 1.6; max-width: 35ch; }
+  
+  .btn {
+    display: inline-block; padding: 16px 32px; background: var(--ink); color: var(--paper);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: background 0.3s;
   }
-  .project-card:hover .project-link-text { gap: 16px; }
+  .btn:hover { background: var(--laterite); }
 
   /* -------------------------------------------------------------
-     A-Z WORKFLOW (Case Study 01)
+     MINIMAL SERVICES / EXPERTISE
      ------------------------------------------------------------- */
-  .workflow-list {
-    max-width: 1200px;
-    margin: 80px auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 120px;
-  }
-  .workflow-step {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-  .workflow-step:nth-child(even) .step-content { order: -1; }
-  
-  .step-img-wrap {
-    position: relative; aspect-ratio: 4/5; background: var(--line); overflow: hidden;
-  }
-  .step-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-  .step-img-wrap:hover .step-img { transform: scale(1.05); }
-  .step-img-wrap::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background-image:
-      repeating-linear-gradient(to right, rgba(255,255,255,0.2) 0 1px, transparent 1px 11.111%),
-      repeating-linear-gradient(to bottom, rgba(255,255,255,0.2) 0 1px, transparent 1px 11.111%);
-  }
-
-  .step-num { font-family: var(--mono); font-size: 14px; color: var(--laterite); margin-bottom: 16px; display: block; }
-  .step-title { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.5vw, 42px); color: var(--ink); margin-bottom: 24px; line-height: 1.1; }
-  .step-body { font-size: 16px; color: var(--charcoal); max-width: 45ch; }
-
+  .service-list { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 80px; }
+  .service-item { border-top: 1px solid var(--line); padding-top: 32px; }
+  .s-num { font-family: var(--mono); color: var(--laterite); font-size: 12px; margin-bottom: 16px; display: block; }
+  .s-title { font-family: var(--serif); font-size: 28px; color: var(--ink); margin-bottom: 16px; }
+  .s-desc { font-size: 16px; color: var(--charcoal); max-width: 40ch; }
 
   /* -------------------------------------------------------------
-     CONTACT
+     CONTACT / FOOTER
      ------------------------------------------------------------- */
-  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-  .contact-info { display: flex; flex-direction: column; gap: 32px; }
-  .contact-block { display: flex; flex-direction: column; gap: 4px; }
-  .contact-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
-  .contact-detail { font-size: 18px; font-family: var(--serif); color: var(--ink); }
-
+  .footer { background: var(--ink); color: var(--paper); padding: 120px 6vw 60px; text-align: center; }
+  .footer-title { font-family: var(--serif); font-size: clamp(48px, 8vw, 100px); font-style: italic; margin-bottom: 60px; color: var(--ivory); }
+  .contact-details { display: flex; justify-content: center; gap: 80px; font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,240,228,0.7); margin-bottom: 120px; }
+  
   /* -------------------------------------------------------------
      ANIMATIONS & RESPONSIVE
      ------------------------------------------------------------- */
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 900px) {
-    /* Preserve the 9-Square Vastu Mandala on Mobile */
+    .nav-links { display: none; } /* Hide links on mobile for simplicity, keep logo */
+    
+    /* Preserve Mobile Grid */
     .hero-mandala-wrap { height: auto; aspect-ratio: 1/1; padding: 0; position: relative; overflow: hidden; }
     .mandala-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 1px; border: none; }
     .cell { min-height: 0; padding: 2vw; justify-content: center; align-items: center; text-align: center; transition: background-color 0.3s; }
     
-    /* Touch Feedback */
     .cell:active { background-color: var(--gold); }
     .cell:active .cell-title { color: var(--paper); }
-    .cell:active .cell-bg { opacity: 0.4 !important; transform: scale(1) !important; transition: 0.1s; }
-
-    /* Continuous Energy Breathing Animation for Mobile */
-    .cell-bg {
-      animation: vastuPulse 15s infinite cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .cell:nth-child(1) .cell-bg { animation-delay: 0s; }
-    .cell:nth-child(3) .cell-bg { animation-delay: 2.5s; }
-    .cell:nth-child(6) .cell-bg { animation-delay: 5s; }
-    .cell:nth-child(9) .cell-bg { animation-delay: 7.5s; } /* Contact SE */
-    .cell:nth-child(8) .cell-bg { animation-delay: 10s; }
-    .cell:nth-child(7) .cell-bg { animation-delay: 12.5s; }
-    .cell:nth-child(4) .cell-bg { animation-delay: 15s; }
-
-    @keyframes vastuPulse {
-      0%, 100% { opacity: 0; transform: scale(1.1); filter: grayscale(100%); }
-      10%, 20% { opacity: 0.3; transform: scale(1); filter: grayscale(0%); }
-      30% { opacity: 0; transform: scale(1.05); filter: grayscale(100%); }
-    }
-
+    
     .direction-label { display: none; }
     .cell-title { font-size: clamp(12px, 3.5vw, 18px); margin: 0; transform: none; }
-    .cell-desc { display: none; }
     .cell:hover .cell-title { transform: none; margin-bottom: 0; }
     
     .cell-center { display: flex; }
-    .center-mandala { width: 80%; height: 80%; }
+    .center-text { font-size: 18px; }
     
-    /* Top Mid Brand Cell */
     .cell:nth-child(2) .cell-content { justify-content: center; align-items: center; gap: 4px; }
-    .cell:nth-child(2) .cell-bg { animation: none; opacity: 0.05; }
     .logo-img { width: 40px; }
     .primary-tagline { font-size: clamp(11px, 2.5vw, 14px); line-height: 1.1; margin: 0; }
 
-    /* Fix General Sections */
+    /* Sections Mobile */
     .section { padding: 80px 6vw; }
-    .section-title { font-size: clamp(32px, 8vw, 42px); margin-bottom: 24px; }
-    .about-grid { grid-template-columns: 1fr; gap: 32px; }
-    
-    .expertise-list { grid-template-columns: 1fr; margin-top: 32px; }
-    .expertise-card { padding: 32px 24px; gap: 16px; }
-    
-    .portfolio-grid { grid-template-columns: 1fr; margin-top: 32px; }
-    .project-card--featured { flex-direction: column; aspect-ratio: auto; min-height: 60vh; }
-    .project-content { padding: 8vw; }
-    
-    .workflow-list { gap: 60px; margin-top: 40px; }
-    .workflow-step { grid-template-columns: 1fr; gap: 32px; }
-    .workflow-step:nth-child(even) .step-content { order: 0; }
-    .step-img-wrap { aspect-ratio: 4/3; }
-    
-    .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .portfolio-item, .portfolio-item:nth-child(even) { grid-template-columns: 1fr; gap: 40px; }
+    .portfolio-item:nth-child(even) .p-img-wrap { order: 0; }
+    .service-list { grid-template-columns: 1fr; gap: 40px; }
+    .contact-details { flex-direction: column; gap: 32px; }
   }
 </style>
 </head>
 <body>
 
-  <!-- 100vh UNCONVENTIONAL HERO GRID -->
-  <div class="hero-mandala-wrap">
+  <!-- STICKY NAVIGATION -->
+  <nav id="sticky-nav">
+    <a href="#hero" class="nav-logo"><img src="vasthu%20logo.svg" alt="VVH" style="width: 100%;"></a>
+    <div class="nav-links">
+      <a href="#portfolio">Works</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- UNCONVENTIONAL HERO GRID -->
+  <div id="hero" class="hero-mandala-wrap">
     <div class="mandala-grid">
-      
       <!-- 1: NW (Air) -->
-      <a href="#services" class="cell">
-        <img src="portfolio_2.png" class="cell-bg" alt="Drawings">
+      <a href="#expertise" class="cell">
         <div class="cell-content">
           <div class="direction-label">NW / Air</div>
-          <div>
-            <h2 class="cell-title">Expertise</h2>
-            <p class="cell-desc">The grid dictates the floor plan. We translate readings into compliant architectural drawings.</p>
-          </div>
+          <h2 class="cell-title">Expertise</h2>
         </div>
       </a>
-
       <!-- 2: Top Mid (Brand) -->
-      <a href="#about" class="cell" style="background: var(--paper);">
-        <img src="hero.png" class="cell-bg" style="filter: grayscale(100%); opacity: 0;" alt="Kerala Home">
+      <a href="#hero" class="cell" style="background: var(--paper);">
         <div class="cell-content" style="justify-content: flex-start; gap: 2vw;">
           <img src="vasthu%20logo.svg" class="logo-img" alt="VVH Logo">
-          <h1 class="primary-tagline">Every <span class="accent-text">Direction</span>,<br>Accounted For.</h1>
+          <h1 class="primary-tagline">Every Direction,<br>Accounted For.</h1>
         </div>
       </a>
-
       <!-- 3: NE (Water) -->
-      <a href="#about" class="cell">
-        <img src="portfolio_4.png" class="cell-bg" alt="Handover">
+      <a href="#contact" class="cell">
         <div class="cell-content">
           <div class="direction-label" style="text-align: right;">NE / Water</div>
-          <div style="text-align: right;">
-            <h2 class="cell-title">Philosophy</h2>
-            <p class="cell-desc" style="right: 2vw; text-align: left;">Two kinds of alignment. A house is aligned twice—once to the compass, once to the contractor's calendar.</p>
-          </div>
+          <h2 class="cell-title" style="text-align: right;">Consulting</h2>
         </div>
       </a>
-
-      <!-- 4: Mid Left (Consulting) -->
-      <a href="#services" class="cell" style="background: var(--paper);">
-        <img src="portfolio_1.png" class="cell-bg" alt="Consulting">
+      <!-- 4: Mid Left -->
+      <a href="#expertise" class="cell" style="background: var(--paper);">
         <div class="cell-content">
-          <div class="direction-label">The Reading</div>
-          <div>
-            <h2 class="cell-title">Consulting</h2>
-            <p class="cell-desc">We begin on site. Establishing exact compass orientations and plotting the Mandala over raw land.</p>
-          </div>
+          <div class="direction-label">The Blueprint</div>
+          <h2 class="cell-title">Design</h2>
         </div>
       </a>
-
-      <!-- 5: Center (Brahmasthan - Animated Mandala) -->
-      <div class="cell cell-center">
-        <svg class="center-mandala" viewBox="0 0 100 100" fill="none" stroke="var(--laterite)" stroke-width="0.5">
-          <rect x="5" y="5" width="90" height="90" />
-          <line x1="35" y1="5" x2="35" y2="95" />
-          <line x1="65" y1="5" x2="65" y2="95" />
-          <line x1="5" y1="35" x2="95" y2="35" />
-          <line x1="5" y1="65" x2="95" y2="65" />
-          <line x1="5" y1="5" x2="95" y2="95" />
-          <line x1="95" y1="5" x2="5" y2="95" />
-          <rect x="35" y="35" width="30" height="30" stroke="var(--ink)" stroke-width="1" />
-        </svg>
-      </div>
-
-      <!-- 6: Mid Right (Approval) -->
-      <a href="#services" class="cell" style="background: var(--paper);">
-        <img src="portfolio_2.png" class="cell-bg" alt="K-Smart" style="filter: hue-rotate(90deg);">
+      <!-- 5: Center (Brahmasthan - The Heart of the Home) -->
+      <a href="#portfolio" class="cell cell-center">
+        <div class="center-text">Welcome<br>Home.</div>
+      </a>
+      <!-- 6: Mid Right -->
+      <a href="#expertise" class="cell" style="background: var(--paper);">
         <div class="cell-content">
           <div class="direction-label" style="text-align: right;">The Permit</div>
-          <div style="text-align: right;">
-            <h2 class="cell-title">K-Smart</h2>
-            <p class="cell-desc" style="right: 2vw; text-align: left;">Local-body permit clearance handled end-to-end. Every reading must tie to a legal drawing.</p>
-          </div>
+          <h2 class="cell-title" style="text-align: right;">K-Smart</h2>
         </div>
       </a>
-
       <!-- 7: SW (Earth) -->
       <a href="#portfolio" class="cell">
-        <img src="hero.png" class="cell-bg" alt="Portfolio">
         <div class="cell-content">
           <div class="direction-label">SW / Earth</div>
-          <div>
-            <h2 class="cell-title">Portfolio</h2>
-            <p class="cell-desc">View our completed projects. Material honesty over stock-photo gloss.</p>
-          </div>
+          <h2 class="cell-title">Portfolio</h2>
         </div>
       </a>
-
-      <!-- 8: Bottom Mid (Construction) -->
-      <a href="#services" class="cell" style="background: var(--paper);">
-        <img src="portfolio_3.png" class="cell-bg" alt="Build">
+      <!-- 8: Bottom Mid -->
+      <a href="#expertise" class="cell" style="background: var(--paper);">
         <div class="cell-content">
           <div class="direction-label">The Build</div>
-          <div>
-            <h2 class="cell-title">Construction</h2>
-            <p class="cell-desc">Translating paper to ground using rich, local materials like laterite and teak.</p>
-          </div>
+          <h2 class="cell-title">Construction</h2>
         </div>
       </a>
-
       <!-- 9: SE (Fire) -->
       <a href="#contact" class="cell">
         <div class="cell-content">
           <div class="direction-label" style="text-align: right;">SE / Fire</div>
-          <div style="text-align: right;">
-            <h2 class="cell-title" style="margin-bottom: 12px;">Contact</h2>
-            <p style="font-family: var(--mono); font-size: 11px; opacity: 0.7; line-height: 2; margin-top: 24px;">
-              +91 9747 000 305<br>
-              info@vastuvidyahomes.com
-            </p>
-          </div>
+          <h2 class="cell-title" style="text-align: right;">Contact</h2>
         </div>
       </a>
-
     </div>
   </div>
 
-  <!-- MAIN WEBSITE CONTENT -->
   <div class="scroll-content">
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="section">
-      <div class="about-grid">
-        <div class="about-header reveal">
-          <div class="eyebrow">Our Philosophy</div>
-          <h2 class="section-title">Two Kinds of Alignment.</h2>
-        </div>
-        <div class="about-text reveal">
-          <p style="font-size: 24px; font-family: var(--serif); color: var(--ink); line-height: 1.4; margin-bottom: 32px;">Have you ever walked into a stunningly designed home, yet felt an inexplicable sense of unease? That is the hidden cost of spatial misalignment.</p>
-          <p>A home built against the natural flow of solar, thermal, and magnetic energy will always feel restless, no matter how expensive the finishes. <strong>Vastu Shastra is not superstition—it is the ancient science of environmental physics.</strong></p>
-          <p>When you align your architecture with the earth's natural grid—placing heavy structural elements in the Southwest to ground the home, and opening the Northeast to invite the morning sun—you stop fighting nature. The result is a space that breathes. A home where sleep is deeper, health is protected, and prosperity naturally follows.</p>
-          <p>At Vastu Vidya Homes, we don't just build houses. We engineer peace of mind from the ground up, ensuring your home is aligned twice: once to the compass, and once to the contractor's calendar.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERTISE SECTION -->
-    <section id="services" class="section section--ivory">
-      <div class="eyebrow reveal">Areas of Expertise</div>
-      <h2 class="section-title reveal">From the Grid to the Handover.</h2>
-      
-      <div class="expertise-list reveal">
-        <div class="expertise-card">
-          <span class="card-num">01 / NW</span>
-          <div class="card-title">VASTU CONSULTING &amp; ARCHITECTURE</div>
-          <div class="card-desc">Our team of Vastu Vidya experts specializes in designing and building homes that are in harmony with natural elements and energy flow. We speak in measurements, not mysticism.</div>
-        </div>
-        <div class="expertise-card">
-          <span class="card-num">02 / NE</span>
-          <div class="card-title">VASTU DRAWINGS &amp; INTERIORS</div>
-          <div class="card-desc">We provide a holistic approach, taking into account the direction of the space, colors, and natural materials (laterite, teak) to create a beautifully balanced design.</div>
-        </div>
-        <div class="expertise-card">
-          <span class="card-num">03 / E</span>
-          <div class="card-title">K-SMART APPROVAL</div>
-          <div class="card-desc">Local-body permit clearance handled end-to-end, because every Vastu reading must tie directly to a compliant, legal drawing and official approval stamp.</div>
-        </div>
-        <div class="expertise-card">
-          <span class="card-num">04 / SW</span>
-          <div class="card-title">CONSTRUCTION &amp; OUTDOOR</div>
-          <div class="card-desc">Site execution and project management from the grid to the handover. Includes comprehensive garden design, landscape architecture, and outdoor construction.</div>
-        </div>
-        <div class="expertise-card">
-          <span class="card-num">05 / SE</span>
-          <div class="card-title">RENOVATION &amp; RETROFIT</div>
-          <div class="card-desc">Expert additions, structural retrofits, and meticulous re-alignment of existing spaces to correct and optimize foundational energy flows.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO INDEX SECTION -->
+    <!-- PORTFOLIO / IMMEDIATE VISIBILITY -->
     <section id="portfolio" class="section">
-      <div class="eyebrow eyebrow--center reveal">Completed Works</div>
-      <h2 class="section-title section-title--center reveal">Built to the Grid.</h2>
-      <p class="section-desc--center reveal">A curated selection of homes where absolute spatial alignment meets uncompromising construction quality.</p>
+      <div class="eyebrow reveal">Selected Works</div>
+      <h2 class="huge-text reveal">We design and build Vastu-compliant homes.</h2>
 
-      <div class="portfolio-grid reveal">
-        <!-- PROJECT 01 (FEATURED) -> Smooth scrolls to #workflow -->
-        <a href="#workflow" class="project-card project-card--featured">
-          <div class="project-image-wrap">
-            <img src="project_1.png" alt="The Courtyard House" class="project-image">
+      <div class="portfolio-list">
+        <!-- Project 1 -->
+        <div class="portfolio-item reveal">
+          <div class="p-img-wrap"><img src="project_1.png" alt="The Courtyard Residence" class="p-img"></div>
+          <div class="p-content">
+            <h3 class="p-title">The Courtyard Residence</h3>
+            <p class="p-desc">Centered around a traditional Nadumuttam, perfectly aligned to maximize cross-ventilation in the Northwest sector. A space that breathes.</p>
+            <a href="#contact" class="btn">Inquire Now</a>
           </div>
-          <div class="project-content">
-            <span class="project-num">CASE STUDY 01</span>
-            <h2 class="project-title">The Courtyard Residence</h2>
-            <p class="project-desc">A deep dive into our A-Z workflow. Centered around a traditional Nadumuttam, perfectly aligned to maximize cross-ventilation in the Northwest sector.</p>
-            <div class="project-link-text">View Full Workflow ↓</div>
-          </div>
-        </a>
+        </div>
 
-        <!-- PROJECT 02 -->
-        <a href="#contact" class="project-card">
-          <div class="project-image-wrap">
-            <img src="hero.png" alt="The Laterite Villa" class="project-image">
+        <!-- Project 2 -->
+        <div class="portfolio-item reveal">
+          <div class="p-img-wrap"><img src="hero.png" alt="The Laterite Villa" class="p-img"></div>
+          <div class="p-content">
+            <h3 class="p-title">The Laterite Villa</h3>
+            <p class="p-desc">Exposed rust-red stone masonry defining the Southwest boundary, grounding the home deeply into the earth element.</p>
+            <a href="#contact" class="btn">Inquire Now</a>
           </div>
-          <div class="project-content">
-            <span class="project-num">PROJECT 02</span>
-            <h2 class="project-title">The Laterite Villa</h2>
-            <p class="project-desc">Exposed rust-red stone masonry defining the Southwest boundary, grounding the home deeply into the earth element.</p>
-            <div class="project-link-text">Inquire →</div>
-          </div>
-        </a>
+        </div>
 
-        <!-- PROJECT 03 -->
-        <a href="#contact" class="project-card">
-          <div class="project-image-wrap">
-            <img src="portfolio_4.png" alt="The Urban Retreat" class="project-image">
+        <!-- Project 3 -->
+        <div class="portfolio-item reveal">
+          <div class="p-img-wrap"><img src="portfolio_4.png" alt="Urban Retreat" class="p-img"></div>
+          <div class="p-content">
+            <h3 class="p-title">Urban Retreat</h3>
+            <p class="p-desc">A contemporary interior space flooded with natural light, where Vastu principles dictate the silent flow of energy.</p>
+            <a href="#contact" class="btn">Inquire Now</a>
           </div>
-          <div class="project-content">
-            <span class="project-num">PROJECT 03</span>
-            <h2 class="project-title">Urban Retreat</h2>
-            <p class="project-desc">A contemporary interior space flooded with natural light, where Vastu principles dictate the silent flow of energy.</p>
-            <div class="project-link-text">Inquire →</div>
-          </div>
-        </a>
+        </div>
       </div>
     </section>
 
-    <!-- THE WORKFLOW SECTION (Case Study 01 Expanded) -->
-    <section id="workflow" class="section section--ivory">
-      <div class="eyebrow eyebrow--center reveal">Case Study 01 Deep Dive</div>
-      <h2 class="section-title section-title--center reveal">The A-Z Workflow</h2>
-      <p class="section-desc--center reveal">A complete walk-through from the first compass reading to the final key handover. We account for every direction, every step of the way.</p>
-
-      <div class="workflow-list">
-        
-        <!-- STEP 01 -->
-        <div class="workflow-step">
-          <div class="step-img-wrap reveal">
-            <img src="portfolio_1.png" alt="The Reading" class="step-img">
-          </div>
-          <div class="step-content reveal">
-            <span class="step-num">PHASE 01</span>
-            <h2 class="step-title">The Reading<br>(Vastu Consulting)</h2>
-            <p class="step-body">We begin on site. Establishing the exact compass orientations, assessing natural elements, and plotting the Vastu Purusha Mandala over the raw land. This ensures the foundational geometry aligns with absolute precision before a single brick is drawn.</p>
-          </div>
-        </div>
-
-        <!-- STEP 02 -->
-        <div class="workflow-step">
-          <div class="step-img-wrap reveal">
-            <img src="portfolio_2.png" alt="The Blueprint" class="step-img">
-          </div>
-          <div class="step-content reveal">
-            <span class="step-num">PHASE 02</span>
-            <h2 class="step-title">The Blueprint<br>(Vastu Drawings &amp; K-Smart)</h2>
-            <p class="step-body">The grid dictates the floor plan. We translate the initial reading into compliant architectural drawings—placing fire elements in the Southeast and maximizing air flow in the Northwest. We then handle all local K-Smart approvals, ensuring the spatial vision is legally cleared.</p>
-          </div>
-        </div>
-
-        <!-- STEP 03 -->
-        <div class="workflow-step">
-          <div class="step-img-wrap reveal">
-            <img src="portfolio_3.png" alt="The Build" class="step-img">
-          </div>
-          <div class="step-content reveal">
-            <span class="step-num">PHASE 03</span>
-            <h2 class="step-title">The Build<br>(Construction)</h2>
-            <p class="step-body">Translating paper to ground. Using rich, local materials like laterite and teak, our site supervisors manage the build day-to-day. We ensure contractors don't compromise the meticulous alignments established in Phase 01.</p>
-          </div>
-        </div>
-
-        <!-- STEP 04 -->
-        <div class="workflow-step">
-          <div class="step-img-wrap reveal">
-            <img src="portfolio_4.png" alt="The Handover" class="step-img">
-          </div>
-          <div class="step-content reveal">
-            <span class="step-num">PHASE 04</span>
-            <h2 class="step-title">The Handover<br>(Finished Space)</h2>
-            <p class="step-body">A completed home bathed in natural light, embodying serenity and balance. From the macro-geometry of the plot to the micro-placement of the interior finishes, the result is a beautiful space built to endure.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="section">
-      <div class="contact-wrap">
-        <div class="contact-header reveal">
-          <div class="eyebrow">Contact Us</div>
-          <h2 class="section-title" style="margin-bottom: 24px;">One firm,<br>one number to call.</h2>
-          <p style="max-width: 40ch; font-size: 18px; color: var(--charcoal);">If you have any questions or would like to schedule a consultation with our experts, please reach out.</p>
-        </div>
-        
-        <div class="contact-info reveal">
-          <div class="contact-block">
-            <span class="contact-label">Call</span>
-            <span class="contact-detail">+91 9747 000 305 <br> +91 9747 000 306</span>
-          </div>
-          <div class="contact-block">
-            <span class="contact-label">Email</span>
-            <span class="contact-detail">info@vastuvidyahomes.com</span>
-          </div>
-          <div class="contact-block">
-            <span class="contact-label">Visit</span>
-            <span class="contact-detail">Vastu Vidya Homes<br>Opposite Kunnuvila Devi Temple<br>Pottayil, Trivandrum, Kerala</span>
-          </div>
-        </div>
-      </div>
+    <!-- MINIMAL EXPERTISE -->
+    <section id="expertise" class="section section--ivory">
+      <div class="eyebrow reveal">Our Expertise</div>
+      <h2 class="huge-text reveal">From the grid to the handover.</h2>
       
-      <div class="reveal" style="display: flex; justify-content: space-between; align-items: center; padding-top: 60px; margin-top: 80px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-soft);">
-        <span>© 2026 VASTU VIDYA HOMES</span>
-        <img src="vasthu%20logo.svg" alt="VVH" style="width: 48px;">
-        <span>ALL RIGHTS RESERVED</span>
+      <div class="service-list reveal">
+        <div class="service-item">
+          <span class="s-num">01</span>
+          <h3 class="s-title">Vastu Architecture</h3>
+          <p class="s-desc">We speak in measurements, not mysticism. Absolute spatial alignment before a single brick is laid.</p>
+        </div>
+        <div class="service-item">
+          <span class="s-num">02</span>
+          <h3 class="s-title">K-Smart Approvals</h3>
+          <p class="s-desc">Every Vastu reading must tie directly to a compliant, legal drawing. We handle all local permits.</p>
+        </div>
+        <div class="service-item">
+          <span class="s-num">03</span>
+          <h3 class="s-title">Turnkey Construction</h3>
+          <p class="s-desc">The same team that reads your plot's geometry stays on site until the keys are in your hand.</p>
+        </div>
+        <div class="service-item">
+          <span class="s-num">04</span>
+          <h3 class="s-title">Interiors & Outdoors</h3>
+          <p class="s-desc">Rich, local materials like laterite and teak, balanced with modern finishes for a serene living experience.</p>
+        </div>
       </div>
     </section>
+
+    <!-- CONTACT FOOTER -->
+    <footer id="contact" class="footer">
+      <h2 class="footer-title reveal">Let's build your home.</h2>
+      
+      <div class="contact-details reveal">
+        <div>
+          <div style="color: var(--gold); margin-bottom: 8px;">CALL</div>
+          <div>+91 9747 000 305</div>
+        </div>
+        <div>
+          <div style="color: var(--gold); margin-bottom: 8px;">EMAIL</div>
+          <div>info@vastuvidyahomes.com</div>
+        </div>
+        <div>
+          <div style="color: var(--gold); margin-bottom: 8px;">VISIT</div>
+          <div>Opposite Kunnuvila Devi Temple<br>Trivandrum, Kerala</div>
+        </div>
+      </div>
+
+      <img src="vasthu%20logo.svg" alt="VVH" style="width: 60px; filter: invert(1); opacity: 0.5;">
+    </footer>
 
   </div>
 
   <script>
+    // Sticky Nav Logic
+    const nav = document.getElementById('sticky-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > window.innerHeight * 0.8) {
+        nav.classList.add('visible');
+      } else {
+        nav.classList.remove('visible');
+      }
+    });
+
+    // Reveal Animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
